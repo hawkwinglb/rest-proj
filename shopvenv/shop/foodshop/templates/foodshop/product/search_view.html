@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "foodshop/base.html" %}
+{% load static %}
+{% block title %}
+<h1>Search</h1>
+{% endblock %}
+{% block content %}
+
+<ul>
+  {% for product in object_list %}
+    <li>
+      <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+
+      {% if product.allergens %}
+      <p>contains allergens:</p>
+      {% for allergen in product.allergens %}
+      <ol>{{ allergen }}</ol>
+      {% endfor %}
+      {% else %}
+      No known allergens
+      {% endif%}
+    </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

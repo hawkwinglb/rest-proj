@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}My shop{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'foodshop\css\base.css' %}" >
+</head>
+<header></header>
+<body>
+<div id="header">
+    <a href="/index" class="logo">My shop</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Your cart:
+                <a href="{% url 'cart:cart_detail' %}">
+                {{ total_items }} item{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+                </a>
+                {% else %}
+                Your cart is empty.
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div>
+    <form action="{% url 'foodshop:search_view' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+</form>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+<footer></footer>
+</html>

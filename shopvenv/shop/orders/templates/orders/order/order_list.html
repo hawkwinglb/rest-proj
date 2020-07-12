@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "foodshop/base.html" %}
+{% load static %}
+{% block title %}
+Title
+{% endblock %}
+{% block content %}
+
+<div>
+    <ol>{% for order in orders %}
+        <li><h1>Order no: {{ order.id }}</h1>
+            <p>{{order.created}}</p>
+
+        {% for item in order.items.all %}
+           <p>{{item.product.name}}</p>
+           <p>{{item.quantity}}</p>
+
+        {% endfor %}
+       </li>
+    {% endfor %}</ol>
+</div>
+{% endblock %}
